@@ -5,6 +5,7 @@ import android.app.Activity;
 import com.globant.equattrocchio.cleanarchitecture.mvp.view.ImagesView;
 import com.globant.equattrocchio.cleanarchitecture.util.bus.RxBus;
 import com.globant.equattrocchio.cleanarchitecture.util.bus.observers.CallServiceButtonObserver;
+import com.globant.equattrocchio.cleanarchitecture.util.bus.observers.ImageClickObserver;
 import com.globant.equattrocchio.data.ImagesServicesImpl;
 import com.globant.equattrocchio.domain.GetLatestImagesUseCase;
 import com.globant.equattrocchio.domain.response.Result;
@@ -28,6 +29,7 @@ public class ImagesPresenter {
     }
 
     private void onCallServiceButtonPressed() {
+
         getLatestImagesUseCase.execute(new DisposableObserver<Result>() {
             @Override
             public void onNext(@NonNull Result result) {
@@ -67,7 +69,12 @@ public class ImagesPresenter {
                 onCallServiceButtonPressed();
             }
         });
-
+        RxBus.subscribe(activity, new ImageClickObserver() {
+            @Override
+            public void onEvent(ImagePressed event) {
+                view.onItemClick(event.getId());
+            }
+        });
     }
 
     public void unregister() {

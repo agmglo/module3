@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.globant.equattrocchio.cleanarchitecture.R;
+import com.globant.equattrocchio.cleanarchitecture.util.bus.RxBus;
+import com.globant.equattrocchio.cleanarchitecture.util.bus.observers.ImageClickObserver;
+import com.globant.equattrocchio.domain.response.Image;
 import com.globant.equattrocchio.domain.response.Result;
 import com.squareup.picasso.Picasso;
 
@@ -19,6 +22,15 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ViewHolder
         ViewHolder(View root) {
             super(root);
             this.imageView = root.findViewById(R.id.image_adapter);
+        }
+
+        void bind(final Image item) {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    RxBus.post(new ImageClickObserver.ImagePressed(item.getId()));
+                }
+            });
         }
     }
 
@@ -37,6 +49,7 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        holder.bind(result.getImages().get(position));
         Picasso.with(holder.imageView.getContext())
                 .load(result.getImages().get(position).getUrl())
                 .into(holder.imageView);
