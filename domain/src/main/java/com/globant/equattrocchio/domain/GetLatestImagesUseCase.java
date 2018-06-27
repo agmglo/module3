@@ -6,7 +6,6 @@ import com.globant.equattrocchio.domain.service.ImagesServices;
 import io.reactivex.observers.DisposableObserver;
 
 public class GetLatestImagesUseCase extends UseCase<Result, Void> {
-
     private ImagesServices imagesServices;
 
     public GetLatestImagesUseCase(ImagesServices imagesServices) {
