@@ -14,10 +14,8 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.observers.DisposableObserver;
 
 public class ImagesPresenter {
-
     private ImagesView view;
     private GetLatestImagesUseCase getLatestImagesUseCase;
-
 
     public ImagesPresenter(ImagesView view, GetLatestImagesUseCase getLatestImagesUseCase) {
         this.view = view;
@@ -29,7 +27,6 @@ public class ImagesPresenter {
     }
 
     private void onCallServiceButtonPressed() {
-
         getLatestImagesUseCase.execute(new DisposableObserver<Result>() {
             @Override
             public void onNext(@NonNull Result result) {
@@ -46,8 +43,6 @@ public class ImagesPresenter {
                 new ImagesServicesImpl().getLatestImages(null);
             }
         }, null);
-
-
         //todo acá tengo que llamar a la domain layer para que llame a la data layer y haga el llamdo al servicio
     }
 
@@ -55,14 +50,11 @@ public class ImagesPresenter {
         // view.loadRecycler("EL TEXTO QUE ME TRAGIA DE LAS PREFERENCES");// todo: traerme el texto de las preferences
     }
 
-
     public void register() {
         Activity activity = view.getActivity();
-
         if (activity == null) {
             return;
         }
-
         RxBus.subscribe(activity, new CallServiceButtonObserver() {
             @Override
             public void onEvent(CallServiceButtonPressed event) {
@@ -79,7 +71,6 @@ public class ImagesPresenter {
 
     public void unregister() {
         Activity activity = view.getActivity();
-
         if (activity == null) {
             return;
         }
