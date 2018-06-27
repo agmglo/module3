@@ -19,10 +19,8 @@ import butterknife.OnClick;
 
 public class ImagesView extends ActivityView {
 
-    @BindView(R.id.tv_incoming_json)
-    TextView tvlabel;
-    @BindView(R.id.recycler_images)
-    RecyclerView recyclerImages;
+    @BindView(R.id.tv_incoming_json) TextView tvlabel;
+    @BindView(R.id.recycler_images) RecyclerView recyclerImages;
 
     public ImagesView(AppCompatActivity activity) {
         super(activity);
