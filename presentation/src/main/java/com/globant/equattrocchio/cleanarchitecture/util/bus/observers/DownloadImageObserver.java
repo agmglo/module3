@@ -6,18 +6,6 @@ public abstract class DownloadImageObserver extends BusObserver<DownloadImageObs
     }
 
     public static class DownloadImage {
-        /*private Integer id;
-
-        public DownloadImage(Integer id){
-            this.id = id;
-        }
-
-        public Integer getId() {
-            return id;
-        }
-
-        public void setId(Integer id) {
-            this.id = id;
-        }*/
+        //do nothing
     }
 }

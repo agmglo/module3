@@ -1,12 +1,10 @@
 package com.globant.equattrocchio.cleanarchitecture.mvp.view.base;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +13,6 @@ import android.view.ViewGroup;
 import com.globant.equattrocchio.cleanarchitecture.R;
 import com.globant.equattrocchio.cleanarchitecture.mvp.presenter.ShowImagePresenter;
 import com.globant.equattrocchio.cleanarchitecture.mvp.view.ShowImageView;
-import com.globant.equattrocchio.cleanarchitecture.util.bus.RxBus;
-import com.globant.equattrocchio.cleanarchitecture.util.bus.observers.DownloadImageObserver;
-import com.globant.equattrocchio.cleanarchitecture.util.bus.observers.ImageClickObserver;
 import com.globant.equattrocchio.data.GetImageServicesImpl;
 import com.globant.equattrocchio.domain.GetImageUseCase;
 import com.globant.equattrocchio.domain.response.Image;

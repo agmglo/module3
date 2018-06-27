@@ -8,7 +8,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 public interface SplashbaseApi {
-
     @GET("api/v1/images/latest")
     Call<Result> getImages();
 

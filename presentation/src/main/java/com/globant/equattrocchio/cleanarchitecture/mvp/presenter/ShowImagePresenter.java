@@ -13,7 +13,6 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.observers.DisposableObserver;
 
 public class ShowImagePresenter {
-
     private ShowImageView view;
     private GetImageUseCase getImageUseCase;
 
@@ -22,7 +21,7 @@ public class ShowImagePresenter {
         this.getImageUseCase = getImageUseCase;
     }
 
-    public void init(){
+    public void init() {
         register();
         RxBus.post(new DownloadImageObserver.DownloadImage());
     }
@@ -50,14 +49,11 @@ public class ShowImagePresenter {
         view.setContent(image);
     }
 
-
     public void register() {
         Activity activity = view.getActivity();
-
         if (activity == null) {
             return;
         }
-
         RxBus.subscribe(activity, new DownloadImageObserver() {
             @Override
             public void onEvent(DownloadImageObserver.DownloadImage event) {
@@ -68,7 +64,6 @@ public class ShowImagePresenter {
 
     public void unregister() {
         Activity activity = view.getActivity();
-
         if (activity == null) {
             return;
         }

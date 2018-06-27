@@ -12,7 +12,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class GetImageServicesImpl implements ShowImageServices {
-
     private static final String URL = "http://splashbase.co/";
 
     @Override
@@ -21,11 +20,8 @@ public class GetImageServicesImpl implements ShowImageServices {
                 baseUrl(URL).
                 addConverterFactory(GsonConverterFactory.create())
                 .build();
-
         SplashbaseApi api = retrofit.create(SplashbaseApi.class);
-
         Call<Image> call = api.getImage(id);
-
         call.enqueue(new Callback<Image>() {
             @Override
             public void onResponse(Call<Image> call, Response<Image> response) {

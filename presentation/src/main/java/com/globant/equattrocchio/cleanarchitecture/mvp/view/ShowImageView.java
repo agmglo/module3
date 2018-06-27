@@ -36,7 +36,6 @@ public class ShowImageView extends DialogFragmentView {
         tvSite.setText(image.getSite());
     }
 
-
     public void showError() {
 
     }
