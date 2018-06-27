@@ -7,6 +7,7 @@ import com.globant.equattrocchio.cleanarchitecture.util.bus.RxBus;
 import com.globant.equattrocchio.cleanarchitecture.util.bus.observers.CallServiceButtonObserver;
 import com.globant.equattrocchio.data.ImagesServicesImpl;
 import com.globant.equattrocchio.domain.GetLatestImagesUseCase;
+import com.globant.equattrocchio.domain.response.Result;
 
 import io.reactivex.annotations.NonNull;
 import io.reactivex.observers.DisposableObserver;
@@ -22,16 +23,15 @@ public class ImagesPresenter {
         this.getLatestImagesUseCase = getLatestImagesUseCase;
     }
 
-    public void showText(String text) {
-        view.showText(text);
+    public void showText(Result result) {
+        view.loadRecycler(result);
     }
 
     private void onCallServiceButtonPressed() {
-
-        getLatestImagesUseCase.execute(new DisposableObserver<String>() {
+        getLatestImagesUseCase.execute(new DisposableObserver<Result>() {
             @Override
-            public void onNext(@NonNull String s) {
-                showText(s);
+            public void onNext(@NonNull Result result) {
+                showText(result);
             }
 
             @Override
@@ -50,7 +50,7 @@ public class ImagesPresenter {
     }
 
     private void loadFromPreferences() {
-        // view.showText("EL TEXTO QUE ME TRAGIA DE LAS PREFERENCES");// todo: traerme el texto de las preferences
+        // view.loadRecycler("EL TEXTO QUE ME TRAGIA DE LAS PREFERENCES");// todo: traerme el texto de las preferences
     }
 
 
