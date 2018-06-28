@@ -27,8 +27,8 @@ public class ImagesPresenter {
     private void onCallServiceButtonPressed() {
         getLatestImagesUseCase.execute(new DisposableObserver<String>() {
             @Override
-            public void onNext(@NonNull String s) {
-                showText(s);
+            public void onNext(@NonNull String imagesResponse) {
+                showText(imagesResponse);
             }
 
             @Override
@@ -41,11 +41,7 @@ public class ImagesPresenter {
                 new ImagesServicesImpl().getLatestImages(null);
             }
         }, null);
-        //todo acá tengo que llamar a la domain layer para que llame a la data layer y haga el llamdo al servicio
-    }
-
-    private void loadFromPreferences() {
-        // view.showText("EL TEXTO QUE ME TRAGIA DE LAS PREFERENCES");// todo: traerme el texto de las preferences
+        //TODO acá tengo que llamar a la domain layer para que llame a la data layer y haga el llamdo al servicio
     }
 
     public void register() {
@@ -63,7 +59,6 @@ public class ImagesPresenter {
 
     public void unregister() {
         Activity activity = view.getActivity();
-
         if (activity == null) {
             return;
         }

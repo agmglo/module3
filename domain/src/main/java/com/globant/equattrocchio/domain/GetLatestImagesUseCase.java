@@ -14,7 +14,7 @@ public class GetLatestImagesUseCase extends UseCase<String, Void> {
     }
 
     @Override
-    void buildUseCaseObservable(DisposableObserver<String> observer, Void aVoid) {
+    void buildUseCaseObservable(final DisposableObserver<String> observer, Void aVoid) {
         imagesServices.getLatestImages(observer);
     }
 }
