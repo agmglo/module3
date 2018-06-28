@@ -18,7 +18,6 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ViewHolder
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-
         ViewHolder(View root) {
             super(root);
             this.imageView = root.findViewById(R.id.image_adapter);
@@ -39,11 +38,9 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ViewHolder
     }
 
     @Override
-    public ImagesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                       int viewType) {
+    public ImagesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_images, parent, false);
-
         return new ViewHolder(view);
     }
 

@@ -1,7 +1,7 @@
 package com.globant.equattrocchio.cleanarchitecture.mvp.view;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -20,17 +20,19 @@ import butterknife.OnClick;
 
 public class ImagesView extends ActivityView {
 
-    @BindView(R.id.tv_incoming_json) TextView tvlabel;
+    private final Context context;
+    @BindView(R.id.tv_incoming_json) TextView tvLabel;
     @BindView(R.id.recycler_images) RecyclerView recyclerImages;
 
     public ImagesView(AppCompatActivity activity) {
         super(activity);
         ButterKnife.bind(this, activity);
+        this.context = getContext();
     }
 
     public void loadRecycler(Result result) {
-        tvlabel.setVisibility(View.GONE);
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+        tvLabel.setVisibility(View.GONE);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
         recyclerImages.setLayoutManager(mLayoutManager);
         recyclerImages.setAdapter(new ImagesAdapter(result));
     }
@@ -41,8 +43,8 @@ public class ImagesView extends ActivityView {
     }
 
     public void showError() {
-        tvlabel.setVisibility(View.VISIBLE);
-        tvlabel.setText(R.string.connection_error);
+        tvLabel.setVisibility(View.VISIBLE);
+        tvLabel.setText(R.string.connection_error);
     }
 
     public void onItemClick(Integer id) {

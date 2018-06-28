@@ -7,7 +7,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
-public interface SplashbaseApi {
+public interface SplashBaseApi {
     @GET("api/v1/images/latest")
     Call<Result> getImages();
 

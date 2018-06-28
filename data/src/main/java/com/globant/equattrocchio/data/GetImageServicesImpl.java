@@ -1,6 +1,6 @@
 package com.globant.equattrocchio.data;
 
-import com.globant.equattrocchio.data.service.api.SplashbaseApi;
+import com.globant.equattrocchio.data.service.api.SplashBaseApi;
 import com.globant.equattrocchio.domain.response.Image;
 import com.globant.equattrocchio.domain.service.ShowImageServices;
 
@@ -20,7 +20,7 @@ public class GetImageServicesImpl implements ShowImageServices {
                 baseUrl(URL).
                 addConverterFactory(GsonConverterFactory.create())
                 .build();
-        SplashbaseApi api = retrofit.create(SplashbaseApi.class);
+        SplashBaseApi api = retrofit.create(SplashBaseApi.class);
         Call<Image> call = api.getImage(id);
         call.enqueue(new Callback<Image>() {
             @Override

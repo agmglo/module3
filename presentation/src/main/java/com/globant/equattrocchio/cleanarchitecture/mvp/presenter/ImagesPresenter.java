@@ -22,7 +22,7 @@ public class ImagesPresenter {
         this.getLatestImagesUseCase = getLatestImagesUseCase;
     }
 
-    public void showText(Result result) {
+    public void loadImages(Result result) {
         view.loadRecycler(result);
     }
 
@@ -30,7 +30,7 @@ public class ImagesPresenter {
         getLatestImagesUseCase.execute(new DisposableObserver<Result>() {
             @Override
             public void onNext(@NonNull Result result) {
-                showText(result);
+                loadImages(result);
             }
 
             @Override
@@ -43,11 +43,7 @@ public class ImagesPresenter {
                 new ImagesServicesImpl().getLatestImages(null);
             }
         }, null);
-        //todo acá tengo que llamar a la domain layer para que llame a la data layer y haga el llamdo al servicio
-    }
-
-    private void loadFromPreferences() {
-        // view.loadRecycler("EL TEXTO QUE ME TRAGIA DE LAS PREFERENCES");// todo: traerme el texto de las preferences
+        //TODO acá tengo que llamar a la domain layer para que llame a la data layer y haga el llamdo al servicio
     }
 
     public void register() {
