@@ -12,13 +12,13 @@ import com.google.gson.annotations.SerializedName;
 @Table(name = Image.TABLE_NAME)
 public class Image extends Model implements Parcelable {
     static final String TABLE_NAME = "images";
-    private static final String COLUMN_ID = "ID";
-    private static final String COLUMN_URL = "Url";
-    private static final String COLUMN_LARGE_URL = "Large url";
+    private static final String COLUMN_ID = "imageId";
+    private static final String COLUMN_URL = "url";
+    private static final String COLUMN_LARGE_URL = "largeUrl";
     @Column(name = COLUMN_ID)
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private Integer imageId;
     @Column(name = COLUMN_URL)
     @SerializedName("url")
     @Expose
@@ -39,9 +39,9 @@ public class Image extends Model implements Parcelable {
 
     private Image(Parcel in) {
         if (in.readByte() == 0) {
-            id = null;
+            imageId = null;
         } else {
-            id = in.readInt();
+            imageId = in.readInt();
         }
         url = in.readString();
         largeUrl = in.readString();
@@ -60,11 +60,11 @@ public class Image extends Model implements Parcelable {
     };
 
     public Integer getImageId() {
-        return id;
+        return imageId;
     }
 
     public void setImageId(Integer id) {
-        this.id = id;
+        this.imageId = id;
     }
 
     public String getUrl() {
@@ -114,7 +114,7 @@ public class Image extends Model implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
+        dest.writeInt(imageId);
         dest.writeString(url);
         dest.writeString(largeUrl);
     }
