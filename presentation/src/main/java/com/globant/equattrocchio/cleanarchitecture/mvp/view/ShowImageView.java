@@ -29,7 +29,7 @@ public class ShowImageView extends DialogFragmentView {
         Picasso.with(getActivity())
                 .load(image.getUrl())
                 .into(imageView);
-        tvId.setText(getActivity().getString(R.string.msg_id, image.getId()));
+        tvId.setText(getActivity().getString(R.string.msg_id, image.getImageId()));
         tvUrl.setText(getActivity().getString(R.string.msg_url, image.getUrl()));
         tvLargeUrl.setText(getActivity().getString(R.string.msg_large_url, image.getLargeUrl()));
         tvCopyright.setText(getActivity().getString(R.string.msg_copyright, image.getCopyright()));

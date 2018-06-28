@@ -27,7 +27,7 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ViewHolder
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    RxBus.post(new ImageClickObserver.ImagePressed(item.getId()));
+                    RxBus.post(new ImageClickObserver.ImagePressed(item.getImageId()));
                 }
             });
         }

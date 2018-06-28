@@ -1,6 +1,7 @@
 package com.globant.equattrocchio.cleanarchitecture.mvp.view;
 
 import android.content.Context;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import com.globant.equattrocchio.cleanarchitecture.adapter.ImagesAdapter;
 import com.globant.equattrocchio.cleanarchitecture.mvp.view.base.ShowImageDialogFragment;
 import com.globant.equattrocchio.cleanarchitecture.util.bus.RxBus;
 import com.globant.equattrocchio.cleanarchitecture.util.bus.observers.CallServiceButtonObserver;
+import com.globant.equattrocchio.cleanarchitecture.util.bus.observers.CallServiceFABObserver;
 import com.globant.equattrocchio.domain.response.Result;
 
 import butterknife.BindView;
@@ -23,6 +25,7 @@ public class ImagesView extends ActivityView {
     private final Context context;
     @BindView(R.id.tv_incoming_json) TextView tvLabel;
     @BindView(R.id.recycler_images) RecyclerView recyclerImages;
+    @BindView(R.id.fab) FloatingActionButton fab;
 
     public ImagesView(AppCompatActivity activity) {
         super(activity);
@@ -40,6 +43,11 @@ public class ImagesView extends ActivityView {
     @OnClick(R.id.btn_call_service)
     public void callServiceBtnPressed() {
         RxBus.post(new CallServiceButtonObserver.CallServiceButtonPressed());
+    }
+
+    @OnClick(R.id.fab)
+    public void callServiceFABPressed() {
+        RxBus.post(new CallServiceFABObserver.CallServiceButtonPressed());
     }
 
     public void showError() {

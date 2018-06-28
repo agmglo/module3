@@ -5,9 +5,11 @@ import android.app.Activity;
 import com.globant.equattrocchio.cleanarchitecture.mvp.view.ImagesView;
 import com.globant.equattrocchio.cleanarchitecture.util.bus.RxBus;
 import com.globant.equattrocchio.cleanarchitecture.util.bus.observers.CallServiceButtonObserver;
+import com.globant.equattrocchio.cleanarchitecture.util.bus.observers.CallServiceFABObserver;
 import com.globant.equattrocchio.cleanarchitecture.util.bus.observers.ImageClickObserver;
 import com.globant.equattrocchio.data.ImagesServicesImpl;
 import com.globant.equattrocchio.domain.GetLatestImagesUseCase;
+import com.globant.equattrocchio.domain.response.Image;
 import com.globant.equattrocchio.domain.response.Result;
 
 import io.reactivex.annotations.NonNull;
@@ -43,7 +45,32 @@ public class ImagesPresenter {
                 new ImagesServicesImpl().getLatestImages(null);
             }
         }, null);
-        //TODO acá tengo que llamar a la domain layer para que llame a la data layer y haga el llamdo al servicio
+    }
+
+    private void onCallServiceFABPressed() {
+        getLatestImagesUseCase.execute(new DisposableObserver<Result>() {
+            @Override
+            public void onNext(@NonNull Result result) {
+                loadImages(result);
+                saveImages(result);
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                view.showError();
+            }
+
+            @Override
+            public void onComplete() {
+                new ImagesServicesImpl().getLatestImages(null);
+            }
+        }, null);
+    }
+
+    private void saveImages(Result result) {
+        for(Image image : result.getImages()){
+            image.save();
+        }
     }
 
     public void register() {
@@ -61,6 +88,12 @@ public class ImagesPresenter {
             @Override
             public void onEvent(ImagePressed event) {
                 view.onItemClick(event.getId());
+            }
+        });
+        RxBus.subscribe(activity, new CallServiceFABObserver() {
+            @Override
+            public void onEvent(CallServiceButtonPressed value) {
+                onCallServiceFABPressed();
             }
         });
     }

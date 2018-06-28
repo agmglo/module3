@@ -3,16 +3,27 @@ package com.globant.equattrocchio.domain.response;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Image implements Parcelable {
+@Table(name = Image.TABLE_NAME)
+public class Image extends Model implements Parcelable {
+    static final String TABLE_NAME = "images";
+    private static final String COLUMN_ID = "ID";
+    private static final String COLUMN_URL = "Url";
+    private static final String COLUMN_LARGE_URL = "Large url";
+    @Column(name = COLUMN_ID)
     @SerializedName("id")
     @Expose
     private Integer id;
+    @Column(name = COLUMN_URL)
     @SerializedName("url")
     @Expose
     private String url;
+    @Column(name = COLUMN_LARGE_URL)
     @SerializedName("large_url")
     @Expose
     private String largeUrl;
@@ -48,11 +59,11 @@ public class Image implements Parcelable {
         }
     };
 
-    public Integer getId() {
+    public Integer getImageId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setImageId(Integer id) {
         this.id = id;
     }
 
