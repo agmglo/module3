@@ -18,12 +18,6 @@ import com.globant.equattrocchio.domain.GetImageUseCase;
 import com.globant.equattrocchio.domain.response.Image;
 
 public class ShowImageDialogFragment extends DialogFragment {
-    public static Intent getStartIntent(Context context, Image image) {
-        Intent intent = new Intent(context, ShowImageDialogFragment.class);
-        intent.putExtra(EXTRA_IMAGE, image);
-        return intent;
-    }
-
     public static ShowImageDialogFragment newInstance(Integer id) {
         ShowImageDialogFragment fragment = new ShowImageDialogFragment();
         Bundle args = new Bundle();

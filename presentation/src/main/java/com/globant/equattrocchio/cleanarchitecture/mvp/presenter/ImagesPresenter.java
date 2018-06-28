@@ -14,14 +14,17 @@ import com.globant.equattrocchio.domain.response.Result;
 
 import io.reactivex.annotations.NonNull;
 import io.reactivex.observers.DisposableObserver;
+import io.realm.Realm;
 
 public class ImagesPresenter {
     private ImagesView view;
     private GetLatestImagesUseCase getLatestImagesUseCase;
+    private Realm mRealm;
 
     public ImagesPresenter(ImagesView view, GetLatestImagesUseCase getLatestImagesUseCase) {
         this.view = view;
         this.getLatestImagesUseCase = getLatestImagesUseCase;
+        mRealm = Realm.getDefaultInstance();
     }
 
     public void loadImages(Result result) {
@@ -51,7 +54,6 @@ public class ImagesPresenter {
         getLatestImagesUseCase.execute(new DisposableObserver<Result>() {
             @Override
             public void onNext(@NonNull Result result) {
-                loadImages(result);
                 saveImages(result);
             }
 
@@ -68,8 +70,10 @@ public class ImagesPresenter {
     }
 
     private void saveImages(Result result) {
-        for(Image image : result.getImages()){
-            image.save();
+        for (Image image : result.getImages()) {
+            mRealm.beginTransaction();
+            mRealm.copyToRealm(image);
+            mRealm.commitTransaction();
         }
     }
 
@@ -104,5 +108,6 @@ public class ImagesPresenter {
             return;
         }
         RxBus.clear(activity);
+        mRealm.close();
     }
 }
