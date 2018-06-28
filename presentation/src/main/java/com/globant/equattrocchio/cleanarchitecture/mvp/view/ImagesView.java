@@ -32,7 +32,7 @@ public class ImagesView extends ActivityView {
 
     public void loadRecycler(Result result) {
         tvlabel.setVisibility(View.GONE);
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
         recyclerImages.setLayoutManager(mLayoutManager);
         recyclerImages.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
         recyclerImages.setAdapter(new ImagesAdapter(result));
