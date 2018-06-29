@@ -2,13 +2,19 @@ package com.globant.equattrocchio.domain;
 
 import android.app.Application;
 
+import com.facebook.stetho.Stetho;
+
 import io.realm.Realm;
-import io.realm.RealmConfiguration;
 
 public class RealmApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
         Realm.init(getApplicationContext());
+        Stetho.initialize(
+                Stetho.newInitializerBuilder(this)
+                        .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
+                        .enableWebKitInspector(RealmInspectorModulesProvider.builder(this).build())
+                        .build());
     }
 }
