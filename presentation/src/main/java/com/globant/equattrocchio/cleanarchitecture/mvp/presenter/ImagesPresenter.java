@@ -60,6 +60,7 @@ public class ImagesPresenter {
     }
 
     private void onCallServiceFABPressed() {
+        view.setProgressVisibility(View.VISIBLE);
         getLatestImagesUseCase.execute(new DisposableObserver<Result>() {
             @Override
             public void onNext(@NonNull Result result) {
@@ -68,7 +69,7 @@ public class ImagesPresenter {
 
             @Override
             public void onError(@NonNull Throwable e) {
-                view.showError();
+                showError();
             }
 
             @Override
@@ -84,6 +85,7 @@ public class ImagesPresenter {
             mRealm.copyToRealmOrUpdate(image);
             mRealm.commitTransaction();
         }
+        view.setProgressVisibility(View.GONE);
     }
 
     public void register() {
