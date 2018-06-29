@@ -1,6 +1,7 @@
 package com.globant.equattrocchio.cleanarchitecture.mvp.presenter;
 
 import android.app.Activity;
+import android.view.View;
 
 import com.globant.equattrocchio.cleanarchitecture.mvp.view.ImagesView;
 import com.globant.equattrocchio.cleanarchitecture.util.bus.RxBus;
@@ -27,11 +28,14 @@ public class ImagesPresenter {
         mRealm = Realm.getDefaultInstance();
     }
 
-    public void loadImages(Result result) {
+    private void loadImages(Result result) {
+        view.setProgressVisibility(View.GONE);
+        view.setButtonVisibility(View.GONE);
         view.loadRecycler(result);
     }
 
     private void onCallServiceButtonPressed() {
+        view.setProgressVisibility(View.VISIBLE);
         getLatestImagesUseCase.execute(new DisposableObserver<Result>() {
             @Override
             public void onNext(@NonNull Result result) {
@@ -40,7 +44,7 @@ public class ImagesPresenter {
 
             @Override
             public void onError(@NonNull Throwable e) {
-                view.showError();
+                showError();
             }
 
             @Override
@@ -48,6 +52,11 @@ public class ImagesPresenter {
                 new ImagesServicesImpl().getLatestImages(null);
             }
         }, null);
+    }
+
+    private void showError() {
+        view.setProgressVisibility(View.GONE);
+        view.showError();
     }
 
     private void onCallServiceFABPressed() {

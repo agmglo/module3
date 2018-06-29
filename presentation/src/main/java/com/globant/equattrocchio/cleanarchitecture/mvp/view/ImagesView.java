@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.globant.equattrocchio.cleanarchitecture.R;
@@ -26,6 +28,8 @@ public class ImagesView extends ActivityView {
     @BindView(R.id.tv_incoming_json) TextView tvLabel;
     @BindView(R.id.recycler_images) RecyclerView recyclerImages;
     @BindView(R.id.fab) FloatingActionButton fab;
+    @BindView(R.id.btn_call_service) Button callServiceButton;
+    @BindView(R.id.progress) ProgressBar progressBar;
 
     public ImagesView(AppCompatActivity activity) {
         super(activity);
@@ -34,7 +38,7 @@ public class ImagesView extends ActivityView {
     }
 
     public void loadRecycler(Result result) {
-        tvLabel.setVisibility(View.GONE);
+        callServiceButton.setVisibility(View.GONE);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
         recyclerImages.setLayoutManager(mLayoutManager);
         recyclerImages.setAdapter(new ImagesAdapter(result));
@@ -53,6 +57,14 @@ public class ImagesView extends ActivityView {
     public void showError() {
         tvLabel.setVisibility(View.VISIBLE);
         tvLabel.setText(R.string.connection_error);
+    }
+
+    public void setProgressVisibility(int visibility) {
+        progressBar.setVisibility(visibility);
+    }
+
+    public void setButtonVisibility(int visibility) {
+        callServiceButton.setVisibility(visibility);
     }
 
     public void onItemClick(Integer id) {
