@@ -5,5 +5,5 @@ import com.globant.equattrocchio.domain.response.Image;
 import io.reactivex.Observer;
 
 public interface ShowImageServices {
-    void getImage(Observer<Image> observer, Integer id);
+    void getImage(final Observer<Image> observer, Integer id);
 }

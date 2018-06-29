@@ -24,7 +24,7 @@ public class Image extends RealmObject {
     @Expose
     private String site;
 
-    public Integer getImageId() {
+    public int getImageId() {
         return imageId;
     }
 

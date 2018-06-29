@@ -22,7 +22,7 @@ public class DialogFragmentView {
 
     @Nullable
     public Context getContext() {
-        return getContext();
+        return fragmentWeakReference.get().getContext();
     }
 
     @Nullable
