@@ -72,7 +72,7 @@ public class ImagesPresenter {
     private void saveImages(Result result) {
         for (Image image : result.getImages()) {
             mRealm.beginTransaction();
-            mRealm.copyToRealm(image);
+            mRealm.copyToRealmOrUpdate(image);
             mRealm.commitTransaction();
         }
     }
