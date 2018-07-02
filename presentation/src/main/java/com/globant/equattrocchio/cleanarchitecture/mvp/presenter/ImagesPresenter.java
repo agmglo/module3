@@ -28,13 +28,13 @@ public class ImagesPresenter {
         mRealm = Realm.getDefaultInstance();
     }
 
-    private void loadImages(Result result) {
+    public void loadImages(Result result) {
         view.setProgressVisibility(View.GONE);
         view.setButtonVisibility(View.GONE);
         view.loadRecycler(result);
     }
 
-    private void onCallServiceButtonPressed() {
+    public void onCallServiceButtonPressed() {
         view.setProgressVisibility(View.VISIBLE);
         getLatestImagesUseCase.execute(new DisposableObserver<Result>() {
             @Override
@@ -54,12 +54,12 @@ public class ImagesPresenter {
         }, null);
     }
 
-    private void showError() {
+    public void showError() {
         view.setProgressVisibility(View.GONE);
         view.showError();
     }
 
-    private void onCallServiceFABPressed() {
+    public void onCallServiceFABPressed() {
         view.setProgressVisibility(View.VISIBLE);
         getLatestImagesUseCase.execute(new DisposableObserver<Result>() {
             @Override
@@ -79,7 +79,7 @@ public class ImagesPresenter {
         }, null);
     }
 
-    private void saveImages(Result result) {
+    public void saveImages(Result result) {
         for (Image image : result.getImages()) {
             mRealm.beginTransaction();
             mRealm.copyToRealmOrUpdate(image);
