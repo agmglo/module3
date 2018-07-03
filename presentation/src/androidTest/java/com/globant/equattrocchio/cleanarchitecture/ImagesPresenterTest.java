@@ -44,7 +44,7 @@ public class ImagesPresenterTest {
     @Test
     public void testLoadImages() {
         result = getMockResult();
-        presenter.loadImages(result);
+        presenter.saveImages(result);
         Mockito.verify(view).setProgressVisibility(View.GONE);
     }
 

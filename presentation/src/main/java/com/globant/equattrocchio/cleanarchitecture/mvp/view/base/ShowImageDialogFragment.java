@@ -39,7 +39,7 @@ public class ShowImageDialogFragment extends DialogFragment {
         if (image != null) {
             getImageUseCase = new GetImageUseCase(new GetImageServicesImpl(), image);
             presenter = new ShowImagePresenter(new ShowImageView(this), getImageUseCase);
-            presenter.init();
+            presenter.init(image);
         }
     }
 
