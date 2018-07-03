@@ -43,7 +43,6 @@ public class ImagesPresenter {
                 new ImagesServicesImpl().getLatestImages(null);
             }
         }, null);
-        //TODO acá tengo que llamar a la domain layer para que llame a la data layer y haga el llamdo al servicio
     }
 
     public void register() {

@@ -1,5 +1,6 @@
 package com.globant.equattrocchio.cleanarchitecture.mvp.view;
 
+import android.content.Context;
 import android.support.v4.app.DialogFragment;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,7 +13,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ShowImageView extends DialogFragmentView {
-
+    private Context context;
     @BindView(R.id.text_id) TextView tvId;
     @BindView(R.id.text_large_url) TextView tvLargeUrl;
     @BindView(R.id.text_url) TextView tvUrl;
@@ -23,20 +24,21 @@ public class ShowImageView extends DialogFragmentView {
     public ShowImageView(DialogFragment dialogFragmentView) {
         super(dialogFragmentView);
         ButterKnife.bind(this, dialogFragmentView.getView());
+        this.context = dialogFragmentView.getContext();
     }
 
     public void setContent(Image image) {
-        Picasso.with(getActivity())
+        Picasso.with(context)
                 .load(image.getUrl())
                 .into(imageView);
-        tvId.setText(getActivity().getString(R.string.msg_id, image.getId()));
-        tvUrl.setText(getActivity().getString(R.string.msg_url, image.getUrl()));
-        tvLargeUrl.setText(getActivity().getString(R.string.msg_large_url, image.getLargeUrl()));
-        tvCopyright.setText(getActivity().getString(R.string.msg_copyright, image.getCopyright()));
-        tvSite.setText(getActivity().getString(R.string.msg_site, image.getSite()));
+        tvId.setText(context.getString(R.string.msg_id, image.getId()));
+        tvUrl.setText(context.getString(R.string.msg_url, image.getUrl()));
+        tvLargeUrl.setText(context.getString(R.string.msg_large_url, image.getLargeUrl()));
+        tvCopyright.setText(context.getString(R.string.msg_copyright, image.getCopyright()));
+        tvSite.setText(context.getString(R.string.msg_site, image.getSite()));
     }
 
     public void showError() {
-        tvId.setText(getActivity().getString(R.string.connection_error));
+        tvId.setText(context.getString(R.string.connection_error));
     }
 }
