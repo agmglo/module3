@@ -7,6 +7,7 @@
 
     <TextView
         android:id="@+id/tv_incoming_json"
+        style="@style/MyTextViewStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -34,6 +35,7 @@
 
     <Button
         android:id="@+id/btn_call_service"
+        style="@style/MyTextViewStyle"
         android:layout_width="@dimen/btn_widht"
         android:layout_height="@dimen/btn_height"
         android:layout_marginEnd="8dp"
@@ -59,7 +61,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

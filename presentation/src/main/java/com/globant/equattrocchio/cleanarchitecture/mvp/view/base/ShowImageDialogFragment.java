@@ -1,7 +1,5 @@
 package com.globant.equattrocchio.cleanarchitecture.mvp.view.base;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,9 +13,13 @@ import com.globant.equattrocchio.cleanarchitecture.mvp.presenter.ShowImagePresen
 import com.globant.equattrocchio.cleanarchitecture.mvp.view.ShowImageView;
 import com.globant.equattrocchio.data.GetImageServicesImpl;
 import com.globant.equattrocchio.domain.GetImageUseCase;
-import com.globant.equattrocchio.domain.response.Image;
 
 public class ShowImageDialogFragment extends DialogFragment {
+    private static final String ARGUMENT_IMAGE = "argument_extra";
+    private Integer image;
+    private ShowImagePresenter presenter;
+    private GetImageUseCase getImageUseCase;
+
     public static ShowImageDialogFragment newInstance(Integer id) {
         ShowImageDialogFragment fragment = new ShowImageDialogFragment();
         Bundle args = new Bundle();
@@ -25,12 +27,6 @@ public class ShowImageDialogFragment extends DialogFragment {
         fragment.setArguments(args);
         return fragment;
     }
-
-    private static final String EXTRA_IMAGE = "extra_image";
-    private static final String ARGUMENT_IMAGE = "argument_extra";
-    private Integer image;
-    private ShowImagePresenter presenter;
-    private GetImageUseCase getImageUseCase;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
