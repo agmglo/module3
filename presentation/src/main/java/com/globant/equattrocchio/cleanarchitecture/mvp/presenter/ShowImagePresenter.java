@@ -11,26 +11,31 @@ import com.globant.equattrocchio.domain.response.Image;
 
 import io.reactivex.annotations.NonNull;
 import io.reactivex.observers.DisposableObserver;
+import io.realm.Realm;
 
 public class ShowImagePresenter {
     private ShowImageView view;
     private GetImageUseCase getImageUseCase;
+    private Realm mRealm;
+    private Integer id;
 
     public ShowImagePresenter(ShowImageView view, GetImageUseCase getImageUseCase) {
         this.view = view;
         this.getImageUseCase = getImageUseCase;
+        mRealm = Realm.getDefaultInstance();
     }
 
-    public void init() {
+    public void init(Integer id) {
         register();
+        this.id = id;
         RxBus.post(new DownloadImageObserver.DownloadImage());
     }
 
     private void onCallService() {
         getImageUseCase.execute(new DisposableObserver<Image>() {
             @Override
-            public void onNext(@NonNull Image result) {
-                showInfo(result);
+            public void onNext(@NonNull Image image) {
+                saveImage(image);
             }
 
             @Override
@@ -43,6 +48,24 @@ public class ShowImagePresenter {
                 new GetImageServicesImpl().getImage(null, null);
             }
         }, null);
+    }
+
+    private void saveImage(Image image) {
+        mRealm.beginTransaction();
+        mRealm.copyToRealmOrUpdate(image);
+        mRealm.commitTransaction();
+
+        showInfo(getResultFromDatabase());
+    }
+
+    private Image getResultFromDatabase() {
+        Image img = new Image();
+        for (Image image : mRealm.where(Image.class).findAll()) {
+            if (image.getImageId() == id) {
+                return image;
+            }
+        }
+        return img;
     }
 
     public void showInfo(Image image) {

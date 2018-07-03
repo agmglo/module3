@@ -28,23 +28,17 @@ public class ImagesPresenter {
         mRealm = Realm.getDefaultInstance();
     }
 
-    public void loadImages(Result result) {
-        view.setProgressVisibility(View.GONE);
-        view.setButtonVisibility(View.GONE);
-        view.loadRecycler(result);
-    }
-
     public void onCallServiceButtonPressed() {
         view.setProgressVisibility(View.VISIBLE);
         getLatestImagesUseCase.execute(new DisposableObserver<Result>() {
             @Override
             public void onNext(@NonNull Result result) {
-                loadImages(result);
+                saveImages(result);
             }
 
             @Override
             public void onError(@NonNull Throwable e) {
-                showError();
+                view.showError();
             }
 
             @Override
@@ -69,7 +63,7 @@ public class ImagesPresenter {
 
             @Override
             public void onError(@NonNull Throwable e) {
-                showError();
+                view.showError();
             }
 
             @Override
@@ -85,7 +79,21 @@ public class ImagesPresenter {
             mRealm.copyToRealmOrUpdate(image);
             mRealm.commitTransaction();
         }
+        view.loadRecycler(getResultFromDatabase());
         view.setProgressVisibility(View.GONE);
+    }
+
+    private boolean databaseIsEmpty() {
+        return mRealm.isEmpty();
+    }
+
+    private Result getResultFromDatabase() {
+        Result result = new Result();
+        if (databaseIsEmpty()) {
+            return result;
+        }
+        result.setImages(mRealm.where(Image.class).findAll());
+        return result;
     }
 
     public void register() {
