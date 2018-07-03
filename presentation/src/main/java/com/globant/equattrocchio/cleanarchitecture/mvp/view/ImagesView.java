@@ -23,7 +23,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class ImagesView extends ActivityView {
-
     private final Context context;
     @BindView(R.id.tv_incoming_json) TextView tvLabel;
     @BindView(R.id.recycler_images) RecyclerView recyclerImages;
