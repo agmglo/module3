@@ -6,6 +6,6 @@ public abstract class DownloadImageObserver extends BusObserver<DownloadImageObs
     }
 
     public static class DownloadImage {
-        //do nothing
+        //Do Nothing...
     }
 }

@@ -13,7 +13,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ShowImageView extends DialogFragmentView {
-
     private final Context context;
     @BindView(R.id.text_id) TextView tvId;
     @BindView(R.id.text_large_url) TextView tvLargeUrl;
