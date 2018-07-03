@@ -13,16 +13,16 @@ import com.globant.equattrocchio.domain.GetLatestImagesUseCase;
 import butterknife.BindView;
 
 public class MainActivity extends AppCompatActivity {
-
     private ImagesPresenter presenter;
     private GetLatestImagesUseCase getLatestImagesUseCase;
     @BindView(R.id.tv_incoming_json) TextView tv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getLatestImagesUseCase = new GetLatestImagesUseCase(new ImagesServicesImpl());
-        presenter = new ImagesPresenter(new ImagesView(this),getLatestImagesUseCase);
+        presenter = new ImagesPresenter(new ImagesView(this), getLatestImagesUseCase);
     }
 
     @Override
